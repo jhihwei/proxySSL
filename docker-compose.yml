@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - express_app
+
+  express_app:
+    image: bitnami/express:latest
+    environment:
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./your-express-app:/app  # 確保這個路徑指向你的 Express 根目錄
