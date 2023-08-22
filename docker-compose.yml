@@ -13,9 +13,12 @@ services:
 
   express_app:
     image: bitnami/express:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile # 若不使用 image，可使用build方式，注意Dockerfile檔案名稱是否需要修改
     environment:
       - PORT=3000
     ports:
-      - "3000:3000"
+      - "3000:3000" # 測試無SSL環境時使用，若不需Nginx反向代理，可直連此port
     volumes:
       - ./your-express-app:/app  # 確保這個路徑指向你的 Express 根目錄
